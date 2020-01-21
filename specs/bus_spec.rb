@@ -10,7 +10,7 @@ class BusTest < Minitest::Test
     @bus = Bus.new("22", "Ocean Terminal")
     @passenger1 = Person.new("alan", 20)
     @passenger2 = Person.new("GG", 38)
-    @bus_stop1 = BusStop.new("Bus stop 1")
+    @bus_stop1 = BusStop.new("Waverley")
   end
 
   def test_bus_noise()
@@ -42,9 +42,36 @@ class BusTest < Minitest::Test
   def test_pick_up_from_stop()
     @bus_stop1.add_person_to_queue(@passenger1)
     @bus_stop1.add_person_to_queue(@passenger2)
+    @bus.pick_up_from_stop(@bus_stop1)
 assert_equal(2, @bus.count_passengers)
 assert_equal(0, @bus_stop1.queue_count())
-
-
   end
+  
+# def test_pick_up_from_stop()
+#     @stop1 = BusStop.new("Elm Row")
+#     @stop1.add_person_to_queue(@passenger1)
+#     @bus.pick_up_from_stop(@stop1)
+#     assert_equal(1, @bus.count_passengers())
+#     assert_equal(0, @stop1.queue_count())
+#   end
+
+  def test_pick_up_from_stop__multiple_people()
+    @stop1 = BusStop.new("Elm Row")
+    @stop1.add_person_to_queue(@passenger1)
+    @stop1.add_person_to_queue(@passenger2)
+    @bus.pick_up_from_stop(@stop1)
+    assert_equal(2, @bus.count_passengers())
+    assert_equal(0, @stop1.queue_count())
+  end
+
+  def test_pick_up_from_stop__bus_does_not_start_empty()
+    @bus.pick_up(@passenger3)
+    @stop1 = BusStop.new("Elm Row")
+    @stop1.add_person_to_queue(@passenger1)
+    @stop1.add_person_to_queue(@passenger2)
+    @bus.pick_up_from_stop(@stop1)
+    assert_equal(3, @bus.count_passengers())
+  end
+
+
 end

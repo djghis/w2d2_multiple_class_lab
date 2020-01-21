@@ -46,7 +46,7 @@ class BusTest < Minitest::Test
 assert_equal(2, @bus.count_passengers)
 assert_equal(0, @bus_stop1.queue_count())
   end
-  
+
 # def test_pick_up_from_stop()
 #     @stop1 = BusStop.new("Elm Row")
 #     @stop1.add_person_to_queue(@passenger1)
@@ -55,14 +55,14 @@ assert_equal(0, @bus_stop1.queue_count())
 #     assert_equal(0, @stop1.queue_count())
 #   end
 
-  def test_pick_up_from_stop__multiple_people()
-    @stop1 = BusStop.new("Elm Row")
-    @stop1.add_person_to_queue(@passenger1)
-    @stop1.add_person_to_queue(@passenger2)
-    @bus.pick_up_from_stop(@stop1)
-    assert_equal(2, @bus.count_passengers())
-    assert_equal(0, @stop1.queue_count())
-  end
+  # def test_pick_up_from_stop__multiple_people()
+  #   @stop1 = BusStop.new("Elm Row")
+  #   @stop1.add_person_to_queue(@passenger1)
+  #   @stop1.add_person_to_queue(@passenger2)
+  #   @bus.pick_up_from_stop(@stop1)
+  #   assert_equal(2, @bus.count_passengers())
+  #   assert_equal(0, @stop1.queue_count())
+  # end
 
   def test_pick_up_from_stop__bus_does_not_start_empty()
     @bus.pick_up(@passenger3)
